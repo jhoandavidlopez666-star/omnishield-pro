@@ -235,11 +235,11 @@
 
             <div class="card">
                 <div>
-                    <h2>Simulador de Custodia</h2>
-                    <p>Bloqueo seguro de activos bajo protocolo inteligente descentralizado.</p>
+                    <h2>Simulador de Custodia P2P</h2>
+                    <p>Bloqueo seguro de activos bajo contrato inteligente descentralizado.</p>
                 </div>
                 <div class="input-group">
-                    <label for="amount">Monto de Operación</label>
+                    <label for="amount">Monto de Operación (ETH / BNB)</label>
                     <input type="number" id="amount" placeholder="0.00" step="0.01">
                 </div>
                 <button id="depositBtn" class="action-btn">Crear Custodia P2P</button>
@@ -286,29 +286,34 @@
             }
         });
 
-        depositBtn.addEventListener('click', () => {
+        depositBtn.addEventListener('click', async () => {
             const val = amountInput.value;
             if(!val || val <= 0) {
-                alert("Ingresa un monto válido.");
+                alert("Ingresa un monto válido para la custodia.");
                 return;
             }
-            appendLog(`Iniciando contrato de custodia por ${val} unidades...`);
-            if (typeof window.ethereum !== 'undefined' && window.ethereum.selectedAddress) {
-                window.ethereum.request({
+            if (typeof window.ethereum === 'undefined' || !window.ethereum.selectedAddress) {
+                alert("Debes conectar tu billetera primero.");
+                appendLog("Error: Billetera no conectada.");
+                return;
+            }
+
+            try {
+                appendLog(`Iniciando despliegue de custodia por ${val} unidades...`);
+                // Conversión del valor a Wei (hexadecimal para la transacción)
+                const weiValue = '0x' + Math.floor(parseFloat(val) * 1e18).toString(16);
+                
+                const txHash = await window.ethereum.request({
                     method: 'eth_sendTransaction',
                     params: [{
                         from: window.ethereum.selectedAddress,
-                        to: window.ethereum.selectedAddress,
-                        value: '0x0',
+                        to: window.ethereum.selectedAddress, // Auto-asignación para pruebas de contrato
+                        value: weiValue,
                     }],
-                }).then((tx) => {
-                    appendLog(`¡Transacción exitosa! Hash: ${tx.substring(0,12)}...`);
-                }).catch((e) => {
-                    appendLog(`Transacción cancelada: ${e.message}`);
                 });
-            } else {
-                appendLog("Error: Debes conectar tu billetera primero.");
-                alert("Conecta tu billetera primero.");
+                appendLog(`¡Transacción ejecutada con éxito! Hash: ${txHash.substring(0,12)}...`);
+            } catch (e) {
+                appendLog(`Transacción rechazada o fallida: ${e.message}`);
             }
         });
     </script>
