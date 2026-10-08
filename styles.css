@@ -1,0 +1,76 @@
+/* OmniShield P2P - Estilos Institucionales */
+:root {
+    --bg-main: #07090e;
+    --bg-card: #111827;
+    --border-color: #1f2937;
+    --accent-color: #00ffcc;
+    --accent-hover: #00ccb1;
+    --text-main: #ffffff;
+    --text-muted: #9ca3af;
+    --success: #10b981;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: var(--accent-color);
+}
+
+button {
+    background-color: var(--accent-color);
+    color: #000000;
+    padding: 12px 24px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+.card {
+    background-color: var(--bg-card);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.status {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: var(--border-color);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.active {
+    color: var(--success);
+    font-weight: bold;
+}
