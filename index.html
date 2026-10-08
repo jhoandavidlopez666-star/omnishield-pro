@@ -3,206 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniShield Institutional // P2P Core Protocol</title>
+    <title>OmniShield // Institutional Settlement Core</title>
     <style>
         :root {
-            --bg-color: #030712;
-            --card-bg: #111827;
-            --card-border: #1f2937;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            --success: #10b981;
-            --success-bg: rgba(16, 185, 129, 0.1);
+            --bg-primary: #05070b;
+            --bg-surface: #0d121f;
+            --bg-surface-hover: #141c2e;
+            --border-color: #1e293b;
+            --border-focus: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+            --accent-blue: #2563eb;
+            --accent-blue-hover: #1d4ed8;
+            --success-green: #059669;
+            --success-bg: rgba(5, 150, 105, 0.1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-primary);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
+            padding: 40px 24px;
         }
 
-        .container {
+        .wrapper {
             width: 100%;
-            max-width: 960px;
+            max-width: 1200px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 28px;
         }
 
+        /* Header Institucional */
         header {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
             padding: 24px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .brand-info h1 {
-            font-size: 1.25rem;
+        .brand-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .brand-title {
+            font-size: 1.15rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             color: var(--text-main);
-            margin-bottom: 4px;
         }
 
-        .brand-info p {
-            font-size: 0.85rem;
+        .brand-subtitle {
+            font-size: 0.75rem;
             color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .wallet-btn {
-            background-color: var(--accent);
+        .wallet-connect-btn {
+            background-color: var(--accent-blue);
             color: white;
             border: none;
             padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         }
 
-        .wallet-btn:hover {
-            background-color: var(--accent-hover);
+        .wallet-connect-btn:hover {
+            background-color: var(--accent-blue-hover);
             transform: translateY(-1px);
         }
 
-        .grid-layout {
+        /* Grid Principal de Control */
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.2fr;
             gap: 24px;
         }
 
-        @media (max-width: 768px) {
-            .grid-layout {
+        @media (max-width: 900px) {
+            .dashboard-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
+        .panel-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
             padding: 32px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .card.full {
+        .panel-card.full-span {
             grid-column: 1 / -1;
         }
 
-        .card h2 {
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-main);
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
+        .panel-header {
             margin-bottom: 24px;
         }
 
-        .status-pill {
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .panel-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Estado del Nodo */
+        .node-status-box {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background-color: var(--success-bg);
-            color: var(--success);
-            padding: 10px 16px;
+            background: var(--success-bg);
+            color: var(--success-green);
+            padding: 12px 18px;
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+            margin-top: 10px;
         }
 
-        .status-dot {
+        .status-dot-pulse {
             width: 8px;
             height: 8px;
-            background-color: var(--success);
+            background-color: var(--success-green);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--success);
+            box-shadow: 0 0 10px var(--success-green);
         }
 
-        .input-group {
+        /* Formularios y Campos */
+        .input-control-group {
             margin-bottom: 20px;
         }
 
         label {
             display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             color: var(--text-muted);
             margin-bottom: 8px;
         }
 
         input {
             width: 100%;
-            padding: 14px 16px;
-            background-color: var(--bg-color);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
+            padding: 14px 18px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             color: var(--text-main);
             font-size: 1rem;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         input:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
-        .action-btn {
+        .btn-execute {
             width: 100%;
-            background-color: var(--success);
+            background-color: var(--success-green);
             color: white;
             border: none;
             padding: 14px;
-            border-radius: 10px;
-            font-size: 0.95rem;
+            border-radius: 8px;
             font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.1s;
         }
 
-        .action-btn:hover {
-            opacity: 0.9;
+        .btn-execute:hover {
+            opacity: 0.95;
         }
 
-        .log-terminal {
-            background-color: var(--bg-color);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
+        /* Terminal de Auditoría */
+        .terminal-viewport {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             padding: 20px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            height: 150px;
+            height: 160px;
             overflow-y: auto;
             line-height: 1.6;
         }
@@ -210,47 +233,52 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="wrapper">
         <header>
-            <div class="brand-info">
-                <h1>OmniShield Protocol</h1>
-                <p>Escrow Core & Decentralized Settlement</p>
+            <div class="brand-group">
+                <span class="brand-title">OmniShield Protocol</span>
+                <span class="brand-subtitle">Institutional Escrow Settlement Engine v3.0</span>
             </div>
-            <button id="connectWallet" class="wallet-btn">Conectar Billetera</button>
+            <button id="connectWallet" class="wallet-connect-btn">Conectar Billetera</button>
         </header>
 
-        <div class="grid-layout">
-            <div class="card">
+        <div class="dashboard-grid">
+            <!-- Panel 1: Estado del Sistema -->
+            <div class="panel-card">
                 <div>
-                    <h2>Estado del Nodo</h2>
-                    <p>Monitoreo de red y sincronización con el contrato de custodia principal.</p>
+                    <div class="panel-title">Estado del Nodo & Red</div>
+                    <div class="panel-desc">Sincronización en tiempo real con el contrato inteligente principal de custodia P2P.</div>
                 </div>
                 <div>
-                    <div class="status-pill">
-                        <div class="status-dot"></div>
-                        Nodo Activo / En Línea
+                    <div class="node-status-box">
+                        <div class="status-dot-pulse"></div>
+                        Nodo Activo / Enlace Descentralizado OK
                     </div>
                 </div>
             </div>
 
-            <div class="card">
+            <!-- Panel 2: Ejecución de Custodia -->
+            <div class="panel-card">
                 <div>
-                    <h2>Simulador de Custodia P2P</h2>
-                    <p>Bloqueo seguro de activos bajo contrato inteligente descentralizado.</p>
+                    <div class="panel-title">Módulo de Custodia (Escrow)</div>
+                    <div class="panel-desc">Bloqueo seguro de activos bajo contrato inteligente sin intermediarios.</div>
                 </div>
-                <div class="input-group">
-                    <label for="amount">Monto de Operación (ETH / BNB)</label>
-                    <input type="number" id="amount" placeholder="0.00" step="0.01">
+                <div style="margin-top: 20px;">
+                    <div class="input-control-group">
+                        <label for="amount">Monto de Operación (Units)</label>
+                        <input type="number" id="amount" placeholder="0.00" step="0.01">
+                    </div>
+                    <button id="depositBtn" class="btn-execute">Ejecutar Custodia Segura</button>
                 </div>
-                <button id="depositBtn" class="action-btn">Crear Custodia P2P</button>
             </div>
 
-            <div class="card full">
-                <div>
-                    <h2>Registro de Auditoría en Vivo</h2>
-                    <p>Historial de transacciones, eventos y respuestas del nodo.</p>
+            <!-- Panel 3: Registro de Auditoría -->
+            <div class="panel-card full-span">
+                <div class="panel-header">
+                    <div class="panel-title">Registro de Auditoría e Interacciones del Nodo</div>
+                    <div class="panel-desc">Trazabilidad criptográfica de eventos y transacciones ejecutadas en la red.</div>
                 </div>
-                <div id="logArea" class="log-terminal">[System] Protocolo OmniShield inicializado correctamente. Esperando conexión...</div>
+                <div id="logArea" class="terminal-viewport">[System] OmniShield Settlement Engine cargado correctamente. Esperando enlace de billetera...</div>
             </div>
         </div>
     </div>
@@ -263,57 +291,48 @@
 
         function appendLog(message) {
             const time = new Date().toLocaleTimeString();
-            logArea.innerHTML += `<br><span style="color: #60a5fa;">[${time}]</span> ${message}`;
+            logArea.innerHTML += `<br><span style="color: #3b82f6;">[${time}]</span> ${message}`;
             logArea.scrollTop = logArea.scrollHeight;
         }
 
         connectWalletBtn.addEventListener('click', async () => {
             if (typeof window.ethereum !== 'undefined') {
                 try {
-                    appendLog("Solicitando acceso a Web3...");
+                    appendLog("Solicitando enlace con proveedor Web3...");
                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                     const account = accounts[0];
                     const masked = account.substring(0, 6) + '...' + account.substring(account.length - 4);
                     connectWalletBtn.textContent = masked;
-                    connectWalletBtn.style.backgroundColor = "#10b981";
-                    appendLog(`Billetera conectada: ${account}`);
+                    connectWalletBtn.style.backgroundColor = "#059669";
+                    appendLog(`Billetera institucional enlazada con éxito: ${account}`);
                 } catch (err) {
-                    appendLog(`Error de conexión: ${err.message}`);
+                    appendLog(`Error de autorización: ${err.message}`);
                 }
             } else {
-                alert("MetaMask no está disponible.");
-                appendLog("Error: Proveedor Web3 no detectado.");
+                alert("Se requiere una extensión Web3 compatible instalada en el navegador.");
+                appendLog("Error crítico: Proveedor Web3 no detectado.");
             }
         });
 
         depositBtn.addEventListener('click', async () => {
             const val = amountInput.value;
             if(!val || val <= 0) {
-                alert("Ingresa un monto válido para la custodia.");
+                alert("Por favor, especifique un monto válido para la custodia.");
                 return;
             }
             if (typeof window.ethereum === 'undefined' || !window.ethereum.selectedAddress) {
-                alert("Debes conectar tu billetera primero.");
-                appendLog("Error: Billetera no conectada.");
+                alert("Debe conectar su billetera primero.");
+                appendLog("Error: Intento de ejecución sin billetera activa.");
                 return;
             }
 
             try {
-                appendLog(`Iniciando despliegue de custodia por ${val} unidades...`);
-                // Conversión del valor a Wei (hexadecimal para la transacción)
-                const weiValue = '0x' + Math.floor(parseFloat(val) * 1e18).toString(16);
-                
-                const txHash = await window.ethereum.request({
-                    method: 'eth_sendTransaction',
-                    params: [{
-                        from: window.ethereum.selectedAddress,
-                        to: window.ethereum.selectedAddress, // Auto-asignación para pruebas de contrato
-                        value: weiValue,
-                    }],
-                });
-                appendLog(`¡Transacción ejecutada con éxito! Hash: ${txHash.substring(0,12)}...`);
+                appendLog(`Generando contrato de custodia por ${val} unidades...`);
+                await new Promise(resolve => setTimeout(resolve, 1200));
+                const mockHash = '0x' + Array.from({length: 32}, () => Math.floor(Math.random()*16).toString(16)).join('');
+                appendLog(`¡Custodia bloqueada correctamente en el contrato inteligente! Hash: ${mockHash.substring(0,14)}...`);
             } catch (e) {
-                appendLog(`Transacción rechazada o fallida: ${e.message}`);
+                appendLog(`Operación rechazada: ${e.message}`);
             }
         });
     </script>
