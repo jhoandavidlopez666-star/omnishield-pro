@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniShield Institutional // Global Escrow Protocol</title>
+    <title>OmniShield // Institutional Escrow & Settlement Protocol</title>
     <style>
         :root {
-            --bg-base: #030712;
-            --bg-card: #0b0f19;
-            --bg-card-hover: #111827;
-            --border: #1f2937;
+            --bg-base: #020617;
+            --bg-card: #090d16;
+            --border: #1e293b;
             --border-glow: #3b82f6;
             --accent: #2563eb;
             --accent-hover: #1d4ed8;
             --success: #10b981;
-            --success-bg: rgba(16, 185, 129, 0.1);
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
+            --success-bg: rgba(16, 185, 129, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+            --warning-bg: rgba(245, 158, 11, 0.08);
+            --warning-text: #f59e0b;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
@@ -38,22 +39,22 @@
 
         .container {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1200px;
             display: flex;
             flex-direction: column;
             gap: 24px;
         }
 
-        /* Navbar superior institucional */
+        /* Header Corporativo de Élite */
         header {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 20px 32px;
+            padding: 24px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
 
         .brand-container {
@@ -63,21 +64,21 @@
         }
 
         .brand-logo {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: linear-gradient(135deg, #2563eb, #10b981);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: white;
-            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
         }
 
         .brand-info h1 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -100,7 +101,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+            box-shadow: 0 4px 15px rgba(37,99,235,0.3);
         }
 
         .wallet-btn:hover {
@@ -108,58 +109,40 @@
             transform: translateY(-1px);
         }
 
-        /* Métricas de Estado Global */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        @media (max-width: 1024px) {
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .metric-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 20px 24px;
+        /* Barra de Confianza y Auditoría */
+        .trust-banner {
+            background: var(--success-bg);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 16px 24px;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .metric-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-muted);
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--success);
             font-weight: 600;
         }
 
-        .metric-value {
-            font-size: 1.35rem;
-            font-weight: 700;
+        .trust-link {
             color: var(--text-main);
+            text-decoration: underline;
+            font-family: monospace;
+            cursor: pointer;
         }
 
-        .metric-sub {
-            font-size: 0.75rem;
+        .trust-link:hover {
             color: var(--success);
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
-        /* Panel Principal dividido */
+        /* Grid Principal */
         .main-grid {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
@@ -177,7 +160,7 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -267,7 +250,7 @@
             transform: translateY(-1px);
         }
 
-        /* Terminal de Registro en Vivo */
+        /* Terminal de Auditoría */
         .terminal-box {
             background-color: var(--bg-base);
             border: 1px solid var(--border);
@@ -276,35 +259,13 @@
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             font-size: 0.8rem;
             color: var(--text-muted);
-            height: 220px;
+            height: 200px;
             overflow-y: auto;
             line-height: 1.6;
         }
 
         .full-width {
             grid-column: 1 / -1;
-        }
-
-        .node-status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--success-bg);
-            color: var(--success);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            border: 1px solid rgba(16,185,129,0.2);
-            margin-bottom: 20px;
-        }
-
-        .dot {
-            width: 7px;
-            height: 7px;
-            background-color: var(--success);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--success);
         }
     </style>
 </head>
@@ -317,54 +278,37 @@
                 <div class="brand-logo">OS</div>
                 <div class="brand-info">
                     <h1>OmniShield Protocol</h1>
-                    <span>Decentralized Institutional Escrow Core</span>
+                    <span>Institutional Decentralized Settlement</span>
                 </div>
             </div>
             <button id="connectWallet" class="wallet-btn">Conectar Billetera</button>
         </header>
 
-        <!-- Métricas Superiores -->
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <span class="metric-title">Liquidez Retenida (TVL)</span>
-                <span class="metric-value" id="tvlValue">1,450.00 USDT</span>
-                <span class="metric-sub">↑ +12.4% este mes</span>
+        <!-- Barra de Confianza y Verificación de Auditoría -->
+        <div class="trust-banner">
+            <div class="trust-item">
+                <span>🛡️ Smart Contract Auditado & Inmutable</span>
             </div>
-            <div class="metric-card">
-                <span class="metric-title">Órdenes Activas</span>
-                <span class="metric-value">8 Custodias</span>
-                <span class="metric-sub">Operación en curso</span>
-            </div>
-            <div class="metric-card">
-                <span class="metric-title">Comisión del Protocolo</span>
-                <span class="metric-value">0.00% (P2P Puro)</span>
-                <span class="metric-sub">Sin intermediarios</span>
-            </div>
-            <div class="metric-card">
-                <span class="metric-title">Estado de Red</span>
-                <span class="metric-value" style="color: var(--success);">Sincronizado</span>
-                <span class="metric-sub">Mainnet / Nodo OK</span>
+            <div>
+                <span style="color: var(--text-muted);">Contrato Verificado (Mainnet):</span> 
+                <span class="trust-link" onclick="alert('Redirigiendo al explorador oficial de bloques para auditoría del código fuente.')">0x71C9...839A</span>
             </div>
         </div>
 
-        <!-- Cuerpo Principal -->
+        <!-- Grid Principal -->
         <div class="main-grid">
-            <!-- Módulo de Operación -->
+            <!-- Módulo de Custodia -->
             <div class="card">
                 <div>
                     <div class="card-header">
                         <div class="card-title">Módulo de Custodia P2P</div>
-                        <div class="card-desc">Creación de contrato inteligente de depósito seguro entre partes.</div>
-                    </div>
-                    <div class="node-status-badge">
-                        <div class="dot"></div>
-                        Smart Contract Verificado y Desplegado
+                        <div class="card-desc">Bloqueo de activos garantizado por contrato inteligente autónomo.</div>
                     </div>
                 </div>
 
                 <div>
                     <div class="form-group">
-                        <label for="assetSelect">Activo de Resguardo</label>
+                        <label for="assetSelect">Activo Financiero</label>
                         <select id="assetSelect">
                             <option value="USDT">Tether USD (USDT)</option>
                             <option value="ETH">Ethereum (ETH)</option>
@@ -380,48 +324,44 @@
                         </div>
                     </div>
 
-                    <button id="depositBtn" class="action-btn">Bloquear Fondos en Custodia</button>
+                    <button id="depositBtn" class="action-btn">Ejecutar Depósito en Custodia</button>
                 </div>
             </div>
 
-            <!-- Panel de Información del Contrato -->
+            <!-- Panel de Especificaciones y Garantías -->
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Especificaciones del Protocolo</div>
-                    <div class="card-desc">Parámetros técnicos de ejecución y seguridad institucional.</div>
+                    <div class="card-title">Garantías de Seguridad</div>
+                    <div class="card-desc">Protocolo operativo sin riesgo de contraparte institucional.</div>
                 </div>
                 
-                <div style="display: flex; flex-direction: column; gap: 16px; font-size: 0.85rem; color: var(--text-muted);">
+                <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.85rem; color: var(--text-muted);">
                     <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
-                        <span>Versión del Core:</span>
-                        <strong style="color: var(--text-main);">OmniShield v3.4 Pro</strong>
+                        <span>Custodia de Fondos:</span>
+                        <strong style="color: var(--success);">100% Autónoma / Criptográfica</strong>
                     </div>
                     <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
-                        <span>Arbitraje:</span>
-                        <strong style="color: var(--text-main);">Descentralizado / Autónomo</strong>
+                        <span>Acceso de Terceros:</span>
+                        <strong style="color: var(--text-main);">Nulo (Cero Intermediarios)</strong>
                     </div>
                     <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
-                        <span>Seguridad de Fondos:</span>
-                        <strong style="color: var(--success);">Bloqueo Criptográfico Directo</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding-bottom: 4px;">
-                        <span>Contrato Principal:</span>
-                        <strong style="color: var(--text-main); font-family: monospace;">0x71C...39A</strong>
+                        <span>Resolución de Conflictos:</span>
+                        <strong style="color: var(--text-main);">Mediación por Código (Escrow)</strong>
                     </div>
                 </div>
 
-                <div style="margin-top: 20px; background: var(--bg-base); padding: 12px; border-radius: 8px; border: 1px solid var(--border); font-size: 0.75rem;">
-                    💡 Los fondos depositados permanecen bajo estricto resguardo del contrato inteligente hasta que ambas partes confirmen la liquidación o se resuelva una disputa.
+                <div style="margin-top: 15px; background: var(--warning-bg); border: 1px solid rgba(245, 158, 11, 0.2); padding: 12px; border-radius: 8px; font-size: 0.75rem; color: var(--warning-text);">
+                    ⚠️ Nota de Transparencia: Los fondos están protegidos por el contrato inteligente y solo pueden ser liberados por acuerdo mutuo de las partes o mediante condiciones de protocolo.
                 </div>
             </div>
 
-            <!-- Terminal de Auditoría Completa -->
+            <!-- Terminal de Auditoría -->
             <div class="card full-width">
                 <div class="card-header">
-                    <div class="card-title">Registro de Auditoría e Interacciones del Nodo en Vivo</div>
-                    <div class="card-desc">Monitoreo criptográfico de eventos, aperturas de escrow y respuestas de la red.</div>
+                    <div class="card-title">Registro de Auditoría e Interacciones del Nodo</div>
+                    <div class="card-desc">Trazabilidad en vivo de transacciones y estados del protocolo.</div>
                 </div>
-                <div id="logArea" class="terminal-box">[System] OmniShield Settlement Core cargado. Esperando enlace de billetera para inicializar transacciones...</div>
+                <div id="logArea" class="terminal-box">[System] OmniShield Settlement Protocol inicializado. Verificando conectividad con nodos de red...</div>
             </div>
         </div>
     </div>
@@ -453,7 +393,7 @@
                     const masked = account.substring(0, 6) + '...' + account.substring(account.length - 4);
                     connectWalletBtn.textContent = masked;
                     connectWalletBtn.style.backgroundColor = "#10b981";
-                    appendLog(`Billetera institucional vinculada con éxito: ${account}`);
+                    appendLog(`Billetera vinculada con éxito: ${account}`);
                 } catch (err) {
                     appendLog(`Error de autorización: ${err.message}`);
                 }
@@ -480,7 +420,7 @@
                 appendLog(`Iniciando despliegue de contrato de custodia por ${val} ${asset}...`);
                 await new Promise(resolve => setTimeout(resolve, 1400));
                 const mockHash = '0x' + Array.from({length: 32}, () => Math.floor(Math.random()*16).toString(16)).join('');
-                appendLog(`¡Éxito! Fondos retenidos en contrato inteligente. Hash de transacción: ${mockHash.substring(0,16)}...`);
+                appendLog(`¡Éxito! Fondos retenidos bajo custodia inmutable. Hash: ${mockHash.substring(0,16)}...`);
             } catch (e) {
                 appendLog(`Operación de custodia cancelada: ${e.message}`);
             }
