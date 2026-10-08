@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniShield // Protocolo P2P</title>
+    <style>
+        body { 
+            margin: 0; 
+            background-color: #07090e; 
+            color: #ffffff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 40px; 
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+        }
+        header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #1f2937; 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+        }
+        h1 { 
+            margin: 0; 
+            font-size: 24px; 
+            color: #00ffcc; 
+        }
+        button { 
+            background-color: #00ffcc; 
+            color: #000000; 
+            padding: 12px 24px; 
+            border: none; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border-radius: 6px; 
+        }
+        button:hover {
+            background-color: #00ccb1;
+        }
+        .card { 
+            background-color: #111827; 
+            padding: 25px; 
+            border-radius: 10px; 
+            border: 1px solid #374151; 
+        }
+        .status {
+            margin-top: 20px;
+            display: inline-block;
+            background-color: #1f2937;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .active {
+            color: #10b981;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OmniShield // Protocolo P2P</h1>
+            <button id="walletBtn" onclick="connectWallet()">Conectar Billetera Web3</button>
+        </header>
+        <main>
+            <div class="card">
+                <h2>Panel de Control Institucional</h2>
+                <p style="color: #9ca3af;">Sistema de custodia descentralizada paso a paso.</p>
+                <div class="status">
+                    Estado del Nodo: <span class="active">Activo (Listo)</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const btn = document.getElementById('walletBtn');
+                    const shortAddr = accounts[0].substring(0, 6) + '...' + accounts[0].substring(38);
+                    btn.innerText = 'Conectado: ' + shortAddr;
+                    btn.style.backgroundColor = '#10b981';
+                    btn.style.color = '#ffffff';
+                } catch (error) {
+                    console.error("Error al conectar la billetera", error);
+                }
+            } else {
+                alert("Por favor, instala MetaMask para operar en el protocolo.");
+            }
+        }
+    </script>
+</body>
+</html>
